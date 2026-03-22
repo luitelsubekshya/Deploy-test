@@ -98,5 +98,20 @@ if st.button("Save Daily Site Update"):
         df_new.to_csv("site_logs.csv", mode='a', index=False, header=not pd.io.common.file_exists("site_logs.csv"))
         
         st.success(f"Log saved to site_logs.csv for {target_site}!")
+    # Use a unique key to prevent the DuplicateElementId error
+if st.button("Save Daily Site Update", key=f"save_btn_{target_site}"):
+    # 1. Collect the data into a dictionary
+    log_entry = {
+        "Date": date.today().strftime("%Y-%m-%d"),
+        "Hospital": target_site,
+        "Category": feedback_type,
+        "Update_Status": "Completed"
+    }
+    
+    # 2. Save to CSV
+    df = pd.DataFrame([log_entry])
+    df.to_csv("site_tracker_data.csv", mode='a', index=False, header=not pd.io.common.file_exists("site_tracker_data.csv"))
+    
+    st.success(f"✅ Data for {target_site} saved to site_tracker_data.csv!")
         
 
