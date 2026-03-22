@@ -80,5 +80,23 @@ with tab3:
 
     if st.button("Save Daily Site Update"):
         st.success(f"Log updated for {target_site}!")
+
+if st.button("Save Daily Site Update"):
+        # 1. Create a dictionary of the data you want to save
+        new_data = {
+            "Date": date.today(),
+            "Hospital": target_site,
+            "Issue Category": feedback_type,
+            "Notes": "Enter the variable name of your text area here" 
+        }
+        
+        # 2. Convert to a DataFrame
+        df_new = pd.DataFrame([new_data])
+        
+        # 3. Append to a CSV file
+        # 'a' means append, header=False prevents repeating the column names
+        df_new.to_csv("site_logs.csv", mode='a', index=False, header=not pd.io.common.file_exists("site_logs.csv"))
+        
+        st.success(f"Log saved to site_logs.csv for {target_site}!")
         
 
