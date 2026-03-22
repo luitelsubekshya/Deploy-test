@@ -35,6 +35,20 @@ with tab1:
         st.checkbox("Confirm Site has Device (Tablet/Laptop)", key=f"dv_{target_site}")
         st.checkbox("Confirm Bed Numbers & Lab Units", key=f"bl_{target_site}")
         st.checkbox("Internet Connectivity Verified", key=f"net_{target_site}")
+        
+        # NEW: Handover Logic
+    handover = st.checkbox("Handover device if needed", key=f"ho_{target_site}")
+    if handover:
+        # Indent the sub-selection for better UI
+        device_type = st.radio(
+            "Select Device Type:",
+            ["Tablet", "Laptop"],
+            key=f"dt_{target_site}",
+            horizontal=True
+        )
+    
+    # NEW: OTP Verification
+    st.checkbox("OTP verified", key=f"otp_{target_site}")
 
 with tab2:
     st.subheader("Phase 2: Digital Integration")
